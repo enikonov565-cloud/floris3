@@ -831,9 +831,12 @@ body:has(.faq) ::view-transition-new(root){
 .pd-related-carousel .hr-nav{top:38%;}
 .pd-related-list{
   display:flex;gap:clamp(14px,1.6vw,28px);overflow-x:auto;scroll-snap-type:x mandatory;
-  padding:4px 4px 10px;margin:0 -4px;
+  scroll-padding-inline:44px;
+  padding:4px 44px 10px;margin:0 -4px;
   scrollbar-width:none;-ms-overflow-style:none;
 }
+/* когда все карточки помещаются без прокрутки — центрируем группу (JS переключает класс) */
+.pd-related-list.is-fit{justify-content:center;}
 .pd-related-list::-webkit-scrollbar{display:none;}
 .pd-related-card{display:block;flex:0 0 clamp(230px,23%,290px);scroll-snap-align:start;}
 .pd-related-card img{
@@ -1734,6 +1737,7 @@ body:has(.faq) ::view-transition-new(root){
   .pd-info{width:100%;}
   .pd-info-inner{max-width:none;padding:28px 16px;}
   .pd-related-card{flex:0 0 74%;}
+  .pd-related-list{padding-left:4px;padding-right:4px;scroll-padding-inline:4px;}
 
   /* ---------- ОФОРМЛЕНИЕ ЗАКАЗА ---------- */
   .checkout-wrap{position:static;width:100%;flex-direction:column;gap:32px;}

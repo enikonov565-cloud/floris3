@@ -582,6 +582,10 @@
         return card.getBoundingClientRect().width + gap;
       }
       function update() {
+        // все карточки помещаются без прокрутки — центрируем их (класс is-fit),
+        // а не полагаемся на justify-content:safe center: в паре с overflow-x:auto
+        // некоторые браузеры сами прокручивают трек, сводя центрирование на нет
+        track.classList.toggle('is-fit', track.scrollWidth <= track.clientWidth + 1);
         prev.disabled = track.scrollLeft <= 4;
         next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
       }
