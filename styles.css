@@ -824,8 +824,18 @@ body:has(.faq) ::view-transition-new(root){
   margin:0 0 clamp(24px,2.5vw,40px);
   font-family:var(--font-sans);font-weight:400;font-size:clamp(22px,1.8vw,32px);letter-spacing:-0.01em;color:var(--dark);
 }
-.pd-related-list{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(14px,1.6vw,28px);}
-.pd-related-card{display:block;}
+/* карусель (одна в один с «Что говорят наши клиенты»): переиспользуем .hr-nav
+   для стрелок ‹ › (анимация + смена цвета на hover), трек — тот же
+   scroll-snap-механизм, что и .home-reviews-track */
+.pd-related-carousel{position:relative;}
+.pd-related-carousel .hr-nav{top:38%;}
+.pd-related-list{
+  display:flex;gap:clamp(14px,1.6vw,28px);overflow-x:auto;scroll-snap-type:x mandatory;
+  padding:4px 4px 10px;margin:0 -4px;
+  scrollbar-width:none;-ms-overflow-style:none;
+}
+.pd-related-list::-webkit-scrollbar{display:none;}
+.pd-related-card{display:block;flex:0 0 clamp(230px,23%,290px);scroll-snap-align:start;}
 .pd-related-card img{
   width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:6px;
   transition:opacity .3s ease;
@@ -1723,7 +1733,7 @@ body:has(.faq) ::view-transition-new(root){
   .pd-gallery{width:100%;height:auto;aspect-ratio:1/1;min-height:0;}
   .pd-info{width:100%;}
   .pd-info-inner{max-width:none;padding:28px 16px;}
-  .pd-related-list{grid-template-columns:repeat(2,1fr);}
+  .pd-related-card{flex:0 0 74%;}
 
   /* ---------- ОФОРМЛЕНИЕ ЗАКАЗА ---------- */
   .checkout-wrap{position:static;width:100%;flex-direction:column;gap:32px;}

@@ -563,6 +563,36 @@
     });
   }
 
+  /* -------------------- Карусели «+ добавить к букету» / «С этим букетом
+     покупают» -------------------- */
+  /* Те же стрелки ‹ ›, что и в «Что говорят наши клиенты» (.hr-nav —
+     анимация + смена цвета на hover уже описаны в styles.css), тот же
+     scroll-snap трек. Логика продублирована с блока отзывов на index.html. */
+  function initRelatedCarousels() {
+    document.querySelectorAll('.pd-related-carousel').forEach(function (wrap) {
+      var track = wrap.querySelector('.pd-related-list');
+      var prev = wrap.querySelector('.hr-prev');
+      var next = wrap.querySelector('.hr-next');
+      if (!track || !prev || !next) return;
+
+      function step() {
+        var card = track.querySelector('.pd-related-card');
+        if (!card) return track.clientWidth;
+        var gap = parseFloat(getComputedStyle(track).columnGap || getComputedStyle(track).gap || 0) || 24;
+        return card.getBoundingClientRect().width + gap;
+      }
+      function update() {
+        prev.disabled = track.scrollLeft <= 4;
+        next.disabled = track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
+      }
+      prev.addEventListener('click', function () { track.scrollBy({ left: -step(), behavior: 'smooth' }); });
+      next.addEventListener('click', function () { track.scrollBy({ left: step(), behavior: 'smooth' }); });
+      track.addEventListener('scroll', function () { requestAnimationFrame(update); }, { passive: true });
+      window.addEventListener('resize', update, { passive: true });
+      update();
+    });
+  }
+
   /* -------------------- FAQ-аккордеон (max-height) -------------------- */
   /* Портировано с index.html. Тихое раскрытие через max-height. */
   function initFAQ() {
@@ -595,4 +625,5 @@
   initScrolled();
   initCatalog();
   initFAQ();
+  initRelatedCarousels();
 })();
