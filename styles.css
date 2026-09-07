@@ -838,7 +838,7 @@ body:has(.faq) ::view-transition-new(root){
 /* когда все карточки помещаются без прокрутки — центрируем группу (JS переключает класс) */
 .pd-related-list.is-fit{justify-content:center;}
 .pd-related-list::-webkit-scrollbar{display:none;}
-.pd-related-card{display:block;flex:0 0 clamp(230px,23%,290px);scroll-snap-align:start;}
+.pd-related-card{display:block;flex:0 0 clamp(280px,30%,360px);scroll-snap-align:start;}
 .pd-related-card img{
   width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:6px;
   transition:opacity .3s ease;
